@@ -18,26 +18,39 @@
  */
 var isSymmetric = function (root) {
   let isSymmetric = true;
-
+  const check = (node1, node2) => {
+    if (node1 == null || node2 === null) {
+      if (node1 === node2) {
+        return;
+      }
+      return (isSymmetric = false);
+    } else if (node1.val === node2.val) {
+      check(node1.left, node2.right);
+      check(node1.right, node2.left);
+    } else {
+      isSymmetric = false;
+    }
+  };
+  check(root, root);
   return isSymmetric;
 };
 // @lc code=end
 
-console.log(
-  isSymmetric({
-    val: 1,
-    left: {
-      val: 2,
-      left: null,
-      right: { val: 3, left: null, right: null },
-    },
-    right: {
-      val: 2,
-      left: null,
-      right: { val: 3, left: null, right: null },
-    },
-  })
-);
+// console.log(
+//   isSymmetric({
+//     val: 1,
+//     left: {
+//       val: 2,
+//       left: { val: 3, left: null, right: null },
+//       right: { val: 4, left: null, right: null },
+//     },
+//     right: {
+//       val: 2,
+//       left: { val: 4, left: null, right: null },
+//       right: { val: 3, left: null, right: null },
+//     },
+//   })
+// );
 
 // console.log(
 //   isSymmetric({
