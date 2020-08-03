@@ -6,12 +6,12 @@
 
 // @lc code=start
 function maximalSquare(matrix: string[][]): number {
-  const arr: number[][] = new Array(matrix.length).fill([]);
+  const arr: number[][] = [];
 
   let maxSlideNum = 0;
   for (let i = 0; i < matrix.length; i++) {
+    arr[i] = [];
     for (let j = 0; j < matrix[i].length; j++) {
-      arr[i][j] = 0;
       if (matrix[i][j] === "1") {
         if (i === 0 || j === 0) {
           arr[i][j] = 1;
@@ -19,6 +19,8 @@ function maximalSquare(matrix: string[][]): number {
           arr[i][j] =
             Math.min(arr[i - 1][j - 1], arr[i][j - 1], arr[i - 1][j]) + 1;
         }
+      } else {
+        arr[i][j] = 0;
       }
       maxSlideNum = Math.max(maxSlideNum, arr[i][j]);
     }
